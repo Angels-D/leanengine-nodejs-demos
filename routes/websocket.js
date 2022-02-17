@@ -29,9 +29,11 @@ router.ws('/live', (ws, req) => {
       live.delete(ws)
   })
   ws.on('message', (msg) => {
-    live.forEach(client => {
-      client.send(msg);
-    }); 
+    if (msg !='ping')
+      live.forEach(client => {
+        if (client != ws)
+          client.send(msg);
+      });
   })
 })
 
