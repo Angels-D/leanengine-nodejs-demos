@@ -26,7 +26,7 @@ const wss = require("express-ws")(router).getWss('/websocket/echo')
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
     if (msg != 'ping'){
-      wsInstance.getWss().clients.forEach((e) => {
+      wsInstance.getWss('/websocket/echo').clients.forEach((e) => {
         e.send(msg)
         ws.send('123')
       })
