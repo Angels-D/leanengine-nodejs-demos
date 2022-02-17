@@ -2,6 +2,8 @@ const {Router} = require('express')
 
 const router = module.exports = new Router
 
+var live = new Set();
+
 /*
  * WebSocket 示例
  *
@@ -18,14 +20,28 @@ const router = module.exports = new Router
  */
 
 /*
+ * 直播间
+ * wscat -c ws://localhost:3000/websocket/live
+*/
+router.ws('/live', (ws, req) => {
+  live.add(ws)
+  ws.on('close',() => {
+      live.delete(ws)
+  })
+  ws.on('message', (msg) => {
+    live.forEach(client => {
+      client.send(msg);
+    }); 
+  })
+})
+
+/*
  * 将客户端发来的消息原样发回客户端
  * wscat -c ws://localhost:3000/websocket/echo
 */
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
-    if (msg != 'ping'){
-      this.getWss().clients.forEach((e) => {e.send(msg)})
-    }
+    ws.send(msg)
   })
 })
 
