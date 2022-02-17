@@ -28,7 +28,7 @@ router.ws('/echo', (ws, req) => {
     if (msg != 'ping'){
       ws.send(wsInstance.getWss().clients)
       ws.send(wss.clients)
-      })
+     
     }
   })
 })
