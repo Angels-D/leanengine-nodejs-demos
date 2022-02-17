@@ -12,7 +12,7 @@ const app = express()
 // 启用 WebSocket 支持，如不需要可去除
 const expressWs = require('express-ws')
 expressWs(app)
-const wss = expressWs(app).getWss('/websocket/echo')
+const wss = expressWs.getWss()
 
 // 设置模板路径和默认引擎
 app.set('views', path.join(__dirname, 'views'))
