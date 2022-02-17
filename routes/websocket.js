@@ -17,13 +17,19 @@ const router = module.exports = new Router
  *
  */
 
+const wss = ws(router).getWss('/')
+
 /*
  * 将客户端发来的消息原样发回客户端
  * wscat -c ws://localhost:3000/websocket/echo
 */
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
-    ws.send(msg)
+    if (msg ！= 'ping'){
+      wss.clients.forEach((e) => {
+        e.send(msg)
+      })
+    }
   })
 })
 
