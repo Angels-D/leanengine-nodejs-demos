@@ -30,7 +30,7 @@ router.ws('/echo', (ws, req) => {
         e.send(msg)
       })
     }
-    else e.send('aaaa')
+    else ws.send('aaaa')
   })
 })
 
