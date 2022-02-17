@@ -17,8 +17,6 @@ const router = module.exports = new Router
  *
  */
 
-const wss = require("express-ws")(router).getWss('/echo')
-
 /*
  * 将客户端发来的消息原样发回客户端
  * wscat -c ws://localhost:3000/websocket/echo
@@ -26,7 +24,7 @@ const wss = require("express-ws")(router).getWss('/echo')
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
     if (msg != 'ping'){
-      router.get123Wss().clients.forEach((e) => {e.send(msg)})
+      wss.clients.forEach((e) => {e.send(msg)})
     }
   })
 })
