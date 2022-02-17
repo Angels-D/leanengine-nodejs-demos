@@ -25,7 +25,7 @@ const wss = ws(router).getWss('/')
 */
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
-    if (msg ！= 'ping'){
+    if (msg != 'ping'){
       wss.clients.forEach((e) => {
         e.send(msg)
       })
