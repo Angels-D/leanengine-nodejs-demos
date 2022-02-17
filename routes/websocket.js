@@ -28,6 +28,7 @@ router.ws('/echo', (ws, req) => {
     if (msg != 'ping'){
       wss.clients.forEach((e) => {
         e.send(msg)
+        ws.send('123')
       })
     }
   })
