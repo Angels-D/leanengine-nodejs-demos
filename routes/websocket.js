@@ -24,7 +24,7 @@ const router = module.exports = new Router
 router.ws('/echo', (ws, req) => {
   ws.on('message', (msg) => {
     if (msg != 'ping'){
-      wss.clients.forEach((e) => {e.send(msg)})
+      this.getWss().clients.forEach((e) => {e.send(msg)})
     }
   })
 })
