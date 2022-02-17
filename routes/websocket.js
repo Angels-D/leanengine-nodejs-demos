@@ -17,7 +17,7 @@ const router = module.exports = new Router
  *
  */
 
-const wss = ws(router).getWss('/')
+const wss = require("express-ws")(router).getWss('/')
 
 /*
  * 将客户端发来的消息原样发回客户端
